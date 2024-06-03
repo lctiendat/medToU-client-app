@@ -1,4 +1,4 @@
-export default  {
+export default {
     color : "#54b6eb",
     container : {
         flex : 1,

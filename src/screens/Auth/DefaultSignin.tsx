@@ -1,10 +1,10 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import globalStyle from "../../assets/styles/global";
-export default function DefaultSignin() {
-    return <View style={{
-        ...globalStyle.container,
-        marginHorizontal: 30
-    }} >
+
+export default function DefaultSignin({ navigation }: any) {
+
+    return <View style={styles.container
+    } >
         <View>
             <Image style={styles.banner} source={require('../../assets/images/banner1.png')} />
         </View>
@@ -16,7 +16,7 @@ export default function DefaultSignin() {
                 <TouchableOpacity style={{
                     ...styles.button,
                     backgroundColor: globalStyle.color,
-                }}>
+                }} onPress={() => navigation.navigate('SigninScreen')}>
                     <Text style={{
                         ...styles.buttonText,
                         color: "#fff"
@@ -55,21 +55,21 @@ export default function DefaultSignin() {
                         Continue with google
                     </Text>
                 </TouchableOpacity>
-                <Text style={
-                    {
-                        ...styles.buttonText,
-                        fontWeight: "normal",
-                        marginVertical: 10
-                    }
-                }>
-                    login
-                </Text>
+
             </View>
         </View>
     </View>
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 30
+
+    },
     welcome: {
         fontSize: 30,
         textAlign: 'center',
