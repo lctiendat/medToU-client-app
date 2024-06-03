@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Category from '../components/Category';
+import DealsOfTheDay from '../components/DealsOfTheDay';
 
 export interface ICate {
     label: string;
@@ -50,6 +51,7 @@ function Home(): React.JSX.Element {
             </View>
             <View style={styles.container}>
                 <Category />
+                <DealsOfTheDay/>
             </View>
         </View>
     );
