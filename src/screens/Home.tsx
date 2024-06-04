@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Image,
-
+    ScrollView,
     StyleSheet,
     Text,
     TextInput,
@@ -10,50 +10,50 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Category from '../components/Category';
 import DealsOfTheDay from '../components/DealsOfTheDay';
-
-export interface ICate {
-    label: string;
-    img: string;
-}
+import Brands from '../components/Brands';
+import BottomTabs from '../components/BottomTabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 function Home(): React.JSX.Element {
 
-
     return (
-        <View style={{backgroundColor: '#eee'}}>
-            <View style={styles.header}>
-                <View style={styles.header_top}>
-                    <Image
-                        source={require('../assets/images/fb_logo.png')}
-                        style={styles.profileImage}
-                    />
-                    <View style={styles.icons}>
-                        <Icon name="notifications" size={24} color="white" />
-                        <Icon name="mail" size={24} color="white" style={styles.mailIcon} />
+        <SafeAreaView>
+            <ScrollView>
+                <View style={{ backgroundColor: '#F7FBFF' }}>
+                    <View style={styles.header}>
+                        <View style={styles.header_top}>
+                            <Image
+                                source={require('../assets/images/fb_logo.png')}
+                                style={styles.profileImage}
+                            />
+                            <View style={styles.icons}>
+                                <Icon name="notifications" size={24} color="white" />
+                                <Icon name="mail" size={24} color="white" style={styles.mailIcon} />
+                            </View>
+                        </View>
+
+                        <View style={styles.header_text}>
+                            <Text style={styles.greeting}>Hi, Ben</Text>
+                            <Text style={styles.welcome}>Welcome to Medtech</Text>
+                        </View>
+                        <View >
+                            <TextInput
+                                style={styles.searchBox}
+                                placeholder="Search Medicine & Healthcare products"
+                                placeholderTextColor="#999"
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.container}>
+                        <Category />
+                        <DealsOfTheDay />
+                        <Brands />
                     </View>
                 </View>
-
-                <View style={styles.header_text}>
-                    <Text style={styles.greeting}>Hi, Ben</Text>
-                    <Text style={styles.welcome}>Welcome to Medtech</Text>
-                </View>
-                <View >
-                    <TextInput
-                        style={styles.searchBox}
-                        placeholder="Search Medicine & Healthcare products"
-                        placeholderTextColor="#999"
-                    />
-                </View>
-            </View>
-            <View>
-
-            </View>
-            <View style={styles.container}>
-                <Category />
-                <DealsOfTheDay/>
-            </View>
-        </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         paddingHorizontal: 30,
-        marginTop:50
+        marginTop: 50,
+        backgroundColor: '#F7FBFF'
     },
     header: {
         paddingHorizontal: 20,
@@ -115,36 +116,6 @@ const styles = StyleSheet.create({
         bottom: -75,
         width: '100%',
         zIndex: 1,
-    },
-    title: {
-        marginTop: 30,
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    categoryList: {
-        paddingRight: 20,
-    },
-    categoryItem: {
-        backgroundColor: 'white',
-        borderRadius: 25,
-        padding: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginRight: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 4,
-        height: 100,
-        width: 80
-    },
-    categoryText: {
-        marginTop: 5,
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: '#333',
     },
 });
 
