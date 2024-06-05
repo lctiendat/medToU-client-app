@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -16,22 +16,24 @@ const categories = [
     { id: '5', name: 'Skin & Hair', icon: 'mail', color: '#4A4A4A', iconType: 'MaterialIcons' },
 ];
 
-const renderCategoryItem = ({ item }: any) => (
-    <View style={styles.categoryItem}>
-        <View style={styles.wrap_icon}>
-            <Icon name={item.icon} size={24} color={item.color} />
+const renderCategoryItem = ({ item, navigation }: any) => (
+    <TouchableOpacity onPress={() => navigation.navigate('ProductsOfCategoryScreen')}>
+        <View style={styles.categoryItem}>
+            <View style={styles.wrap_icon}>
+                <Icon name={item.icon} size={24} color={item.color} />
+            </View>
+            <Text style={styles.categoryText}>{item.name}</Text>
         </View>
-        <Text style={styles.categoryText}>{item.name}</Text>
-    </View>
+    </TouchableOpacity>
 );
 
-export default function Category() {
+export default function Category({ navigation }) {
     return (
         <View>
             <Text style={styles.title}>Top Categories</Text>
             <FlatList
                 data={categories}
-                renderItem={renderCategoryItem}
+                renderItem={({ item }) => renderCategoryItem({ item, navigation })}
                 keyExtractor={(item) => item.id}
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#333',
     },
-    wrap_icon : {
+    wrap_icon: {
         alignItems: 'center',
         justifyContent: 'center',
         width: 50,

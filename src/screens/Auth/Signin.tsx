@@ -1,124 +1,146 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function Signin() {   
+function LoginScreen({ navigation }: any) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
-    return <View style={styles.container}>
-        <Text><Icon name="arrow-back-outline" size={24} color="#000" /> </Text>
-        <Text style={styles.welcomeText} > Wellcome Back! </Text>
-        <View style={styles.formWrapper} >
-            <View style={styles.formInputWrapper} >
-                <TextInput style={styles.formInput} placeholder="Username" placeholderTextColor={'#D8D8D8'}></TextInput>
-                <Icon style={styles.formInputIcon} name="person-outline" size={25} color="#000" />
+
+    const validate = () => {
+
+        let valid = true;
+        if (!username) {
+            setUsernameError('Username is required');
+            valid = false;
+        } else {
+            setUsernameError('');
+        }
+
+        if (!password) {
+            setPasswordError('Password is required');
+            valid = false;
+        } else {
+            setPasswordError('');
+        }
+
+        if (valid) {
+            Alert.alert('Login Successful', `Welcome back, ${username}!`);
+            setTimeout(() => {
+                navigation.navigate('Tabs');
+            }, 2000);
+        }
+    };
+
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.backButton}>
+                <Icon name="arrow-back-outline" size={24} color="black" />
+            </TouchableOpacity>
+            <Text style={styles.welcomeText}>Welcome Back!</Text>
+
+            <View style={styles.inputContainer}>
+                <Icon name="person-outline" size={24} color="gray" />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Username"
+                    placeholderTextColor="gray"
+                    value={username}
+                    onChangeText={setUsername}
+                />
             </View>
-            <View style={styles.formInputWrapper} >
-                <TextInput style={styles.formInput} placeholder="Password" placeholderTextColor={'#D8D8D8'}></TextInput>
-                <Icon style={styles.formInputIcon} name="lock-closed-outline" size={25} color="#000" />
-                <Text style={styles.forgotText}>Forgot?</Text>
-            </View>
-            <View>
-                <TouchableOpacity style={
-                    styles.button
-                }>
-                    <Text style={
-                        styles.buttonText
-                    }>
-                        Login
-                    </Text>
+            {usernameError ? <Text style={styles.errorText}>{usernameError}</Text> : null}
+
+            <View style={styles.inputContainer}>
+                <Icon name="lock-closed-outline" size={24} color="gray" />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    placeholderTextColor="gray"
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
+                />
+                <TouchableOpacity>
+                    <Text style={styles.forgotText}>Forgot?</Text>
                 </TouchableOpacity>
             </View>
-        </View>
-        <View style={styles.bottomWrapper} >
-            <Icon name="chevron-back-outline" style={styles.bottomWrapper__icon} size={15} color="#090F47" />
-            <Text style={styles.textBottom}> Dont't have an account? Sign Up </Text>
-        </View>
-    </View>
-};
+            {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
+            <TouchableOpacity style={styles.loginButton} onPress={validate}>
+                <Text style={styles.loginButtonText}>LOGIN</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.signupContainer}>
+                <Text style={styles.signupText}>
+                    Don’t have an account? <Text style={styles.signupLink}>Sign Up</Text>
+                </Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
 
 const styles = StyleSheet.create({
-    container : {
-        flex : 1,
-        backgroundColor : "#fff",
-        justifyContent : "center",
-        // alignItems : "center",
-        paddingHorizontal: 30,
-        paddingVertical: 30
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20,
+        justifyContent: 'center',
+    },
+    backButton: {
+        position: 'absolute',
+        top: 40,
+        left: 20,
     },
     welcomeText: {
-        fontSize: 25,
+        fontSize: 28,
         fontWeight: 'bold',
-        color: '#000',
-        marginTop:30
+        marginBottom: 20,
     },
-    formWrapper: {
-        width: '100%',
-        color: '#090F47'
-    },
-    formInput: {
-        height: 50,
-        width: '100%',
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
-        paddingLeft: 50,
-        fontSize: 14
+        borderBottomColor: 'lightgray',
+        marginBottom: 10,
     },
-    placeholderTextColor: {
-        color: "#ccc"
-    },
-    formInputWrapper: {
-        position: "relative",
-        marginTop : 30
-    },
-    formInputIcon: {
-        position: "absolute",
-        top: 10,
-        left: 10,
-        zIndex: 100,
+    input: {
+        flex: 1,
+        marginLeft: 10,
+        paddingVertical: 10,
+        color: 'black',
     },
     forgotText: {
-        position: "absolute",
-        top: 15,
-        right: 10,
-        zIndex: 100,
-        fontSize: 12
+        color: 'gray',
     },
-    button: {
-        height: 50,
-        width: '100%',
-        justifyContent: "center",
-        alignItems: "center",
-        marginVertical: 8,
-        borderRadius: 30,
-        backgroundColor: '#4157FF',
-        borderColor: "#ccc",
-        borderWidth: 1,
-        flexDirection: 'row',
-        marginTop:30
-
-    },
-    buttonText: {
-        fontSize: 13,
-        textAlign: 'center',
-        textTransform: "uppercase",
-        fontWeight: "bold",
-        color: '#fff'
-    },
-    textBottom: {
-        color: "gray",
-        fontSize: 13,
-        textAlign: 'center',
-        justifyContent: 'center',
-    },
-    bottomWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+    loginButton: {
+        backgroundColor: 'blue',
+        borderRadius: 25,
+        paddingVertical: 15,
         alignItems: 'center',
+        marginTop: 20,
+    },
+    loginButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    signupContainer: {
+        marginTop: 20,
+        alignItems: 'center',
+    },
+    signupText: {
+        color: 'gray',
+    },
+    signupLink: {
+        color: 'blue',
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+        marginLeft: 10,
+    },
+});
 
-    },
-    bottomWrapper__icon: {
-        color: "gray",
-        fontSize: 15,
-    },
-    
-})
+export default LoginScreen;

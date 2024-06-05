@@ -2,11 +2,11 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Home from '../../screens/Auth/Signin';
-import NotificationsScreen from '../../screens/Auth/Signin';
+import Home from '../../screens/Home';
+import NotificationsScreen from '../../screens/Notification';
 import AddScreen from '../../screens/Auth/Signin';
 import OrdersScreen from '../../screens/Auth/Signin';
-import ProfileScreen from '../../screens/Auth/Signin';
+import { Profile as ProfileScreen } from '../../screens';
 import { StyleSheet, View } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 function BottomTabs() {
     return (
         <Tab.Navigator
-    
+            initialRouteName="Home"
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
@@ -68,6 +68,7 @@ function BottomTabs() {
                     paddingBottom: 5,
                     paddingTop: 5,
                 },
+                headerShown: false
             })}
         >
             <Tab.Screen name="Home" component={Home} />

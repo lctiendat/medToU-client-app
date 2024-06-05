@@ -6,6 +6,10 @@ import Home from './Home';
 import VerifyOTP from './Auth/VerifyOTP';
 import ProductsOfCategory from './ProductsOfCategory';
 import ProductDetail from './ProductDetail';
+import Cart from './Cart';
+import Checkout from './Checkout';
+import Notification from './Notification';
+import Profile from './Profile';
 export {
     DefaultSignin,
     Signin,
@@ -13,5 +17,9 @@ export {
     Home,
     VerifyOTP,
     ProductsOfCategory,
-    ProductDetail
+    ProductDetail,
+    Cart,
+    Checkout,
+    Notification,
+    Profile
 }
