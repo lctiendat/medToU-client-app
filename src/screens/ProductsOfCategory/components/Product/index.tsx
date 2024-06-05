@@ -1,26 +1,17 @@
-import React from 'react';
-import { View, FlatList, StyleSheet, Image, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons'
 
-const deals = [
-    {
-        id: '1',
-        name: 'Accu-check Active Test Strip',
-        price: '$112',
-        rating: 4.2,
-        image: 'https://via.placeholder.com/150', // Replace with your image URL
-    },
-    {
-        id: '2',
-        name: 'Omron HEM-8712 BP Monitor',
-        price: '$150',
-        rating: 4.5,
-        image: 'https://via.placeholder.com/150', // Replace with your image URL
-    },
-    // Add more items as needed
-];
+interface IProcduct {
+    id: number;
+    name: string;
+    image: string;
+    price: number;
+    rating: number;
+    isSale: boolean;
+    discount: number;
+}
 
-const renderDealItem = ({ item }: any) => (
+const renderItem = ({ item }: any) => (
     <View style={styles.dealItem}>
         <Image source={{ uri: item.image }} style={styles.image} />
         <Text style={styles.name}>{item.name}</Text>
@@ -34,23 +25,59 @@ const renderDealItem = ({ item }: any) => (
     </View>
 );
 
-const DealsOfTheDay = () => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Deals of the Day</Text>
-                <Text style={styles.more}>More</Text>
-            </View>
-            <FlatList
-                data={deals}
-                renderItem={renderDealItem}
-                keyExtractor={(item) => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.dealsList}
-            />
+const products = [
+    {
+        id: 1,
+        name: 'Accu-check Active Test Strip',
+        image: 'https://via.placeholder.com/150',
+        price: 112,
+        rating: 4.2,
+        isSale: true,
+        discount: 15
+    },
+    {
+        id: 2,
+        name: 'Accu-check Active Test Strip',
+        image: 'https://via.placeholder.com/150',
+        price: 112,
+        rating: 4.2,
+        isSale: true,
+        discount: 15
+    },
+    {
+        id: 3,
+        name: 'Accu-check Active Test Strip',
+        image: 'https://via.placeholder.com/150',
+        price: 112,
+        rating: 4.2,
+        isSale: true,
+        discount: 15
+    },
+    {
+        id: 4,
+        name: 'Accu-check Active Test Strip',
+        image: 'https://via.placeholder.com/150',
+        price: 112,
+        rating: 4.2,
+        isSale: true,
+        discount: 15
+    },
+
+]
+export default function index(params: any) {
+    return <View style={styles.container}>
+        <View style={styles.header}>
+            <Text style={styles.title}>All Products</Text>
         </View>
-    );
+        <FlatList
+            data={products}
+            renderItem={renderItem}
+            numColumns={2}
+            keyExtractor={(item: any) => item.id}
+            horizontal={false}
+            contentContainerStyle={styles.dealsList}
+        />
+    </View>
 }
 
 const styles = StyleSheet.create({
@@ -78,20 +105,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 8,
         marginRight: 20,
-        width: 170,
-        height  : 200,
+        width: 163,
+        height: 200,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
+        marginTop: 20
     },
     image: {
         width: '100%',
         height: 100,
         borderRadius: 8,
         marginBottom: 10,
-        objectFit : 'cover'
+        objectFit: 'cover'
     },
     name: {
         fontSize: 14,
@@ -104,21 +132,21 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 5,
         fontWeight: 'bold',
-        marginLeft : 10,
+        marginLeft: 10,
     },
     ratingContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#FFC002',
         padding: 5,
-        borderTopLeftRadius : 5,
-        borderBottomLeftRadius : 5,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
     },
     rating: {
         fontSize: 14,
         marginLeft: 5,
-        fontWeight : 'bold',
-        color : '#fff'
+        fontWeight: 'bold',
+        color: '#fff'
     },
     priceContainer: {
         width: '100%',
@@ -130,5 +158,3 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     }
 });
-
-export default DealsOfTheDay;
