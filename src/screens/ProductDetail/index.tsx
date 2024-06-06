@@ -13,10 +13,10 @@ import Rating from './component/Rating'
 import Review from './component/Review';
 import Package from './component/Package';
 
-const Index = () => {
+const Index = ({ navigation }: any) => {
     return (
         <ScrollView style={styles.container}>
-            <Header />
+            <Header navigation={navigation} />
 
             <Text style={styles.productTitle}>Sugar Free Gold Low Calories</Text>
             <Text style={styles.productSubtitle}>Etiam mollis metus non purus</Text>

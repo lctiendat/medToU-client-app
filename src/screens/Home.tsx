@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+    Alert,
     Image,
+    PermissionsAndroid,
+    Platform,
     ScrollView,
     StyleSheet,
     Text,
@@ -11,12 +14,59 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Category from '../components/Category';
 import DealsOfTheDay from '../components/DealsOfTheDay';
 import Brands from '../components/Brands';
-import BottomTabs from '../components/BottomTabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+// import Geolocation from 'react-native-geolocation-service';
 
 
-function Home(): React.JSX.Element {
+function Home({ navigation }: any): React.JSX.Element {
+
+
+    // const [location, setLocation] = useState(null);
+
+    // const requestLocationPermission = async () => {
+    //     if (Platform.OS === 'android') {
+    //         const granted = await PermissionsAndroid.request(
+    //             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    //             {
+    //                 title: 'Location Permission',
+    //                 message: 'This app needs access to your location.',
+    //                 buttonNeutral: 'Ask Me Later',
+    //                 buttonNegative: 'Cancel',
+    //                 buttonPositive: 'OK',
+    //             }
+    //         );
+    //         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+    //             console.warn('Location permission denied');
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // };
+
+    // const getLocation = () => {
+    //     Geolocation.getCurrentPosition(
+    //         (position) => {
+    //             console.log(position);
+    //             Alert.alert(JSON.stringify(position))
+    //             setLocation(position.coords);
+    //         },
+    //         (error) => {
+    //             console.error(error);
+    //         },
+    //         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    //     );
+    // };
+
+    // useEffect(() => {
+    //     const fetchLocation = async () => {
+    //         const hasLocationPermission = await requestLocationPermission();
+    //         if (hasLocationPermission) {
+    //             getLocation();
+    //         }
+    //     };
+    //     fetchLocation();
+    // }, []);
+
 
     return (
         <SafeAreaView>
@@ -47,7 +97,7 @@ function Home(): React.JSX.Element {
                         </View>
                     </View>
                     <View style={styles.container}>
-                        <Category />
+                        <Category navigation={navigation} />
                         <DealsOfTheDay />
                         <Brands />
                     </View>

@@ -10,6 +10,7 @@ import Cart from './Cart';
 import Checkout from './Checkout';
 import Notification from './Notification';
 import Profile from './Profile';
+import ForgotPassword from "./Auth/Forgot";
 export {
     DefaultSignin,
     Signin,
@@ -21,5 +22,6 @@ export {
     Cart,
     Checkout,
     Notification,
-    Profile
+    Profile,
+    ForgotPassword
 }

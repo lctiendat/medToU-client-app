@@ -73,7 +73,7 @@ function LoginScreen({ navigation }: any) {
                 <Text style={styles.loginButtonText}>LOGIN</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.signupContainer}>
+            <TouchableOpacity style={styles.signupContainer} onPress={() => navigation.navigate('SignupScreen')}>
                 <Text style={styles.signupText}>
                     Don’t have an account? <Text style={styles.signupLink}>Sign Up</Text>
                 </Text>

@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface IProcduct {
@@ -11,18 +11,20 @@ interface IProcduct {
     discount: number;
 }
 
-const renderItem = ({ item }: any) => (
-    <View style={styles.dealItem}>
-        <Image source={{ uri: item.image }} style={styles.image} />
-        <Text style={styles.name}>{item.name}</Text>
-        <View style={styles.priceContainer}>
-            <Text style={styles.price}>{item.price}</Text>
-            <View style={styles.ratingContainer}>
-                <Icon name="star" size={16} color="#FFDF00" />
-                <Text style={styles.rating}>{item.rating}</Text>
+const renderItem = ({ item, navigation }: any) => (
+    <TouchableOpacity onPress={() => navigation.navigate('ProductsDetailScreen')}>
+        <View style={styles.dealItem}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <Text style={styles.name}>{item.name}</Text>
+            <View style={styles.priceContainer}>
+                <Text style={styles.price}>{item.price}</Text>
+                <View style={styles.ratingContainer}>
+                    <Icon name="star" size={16} color="#FFDF00" />
+                    <Text style={styles.rating}>{item.rating}</Text>
+                </View>
             </View>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const products = [
@@ -64,18 +66,19 @@ const products = [
     },
 
 ]
-export default function index(params: any) {
+export default function index({ navigation }: any) {
     return <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.title}>All Products</Text>
         </View>
         <FlatList
             data={products}
-            renderItem={renderItem}
+            renderItem={(item) => renderItem({ item, navigation })}
             numColumns={2}
             keyExtractor={(item: any) => item.id}
             horizontal={false}
             contentContainerStyle={styles.dealsList}
+            nestedScrollEnabled={true}
         />
     </View>
 }

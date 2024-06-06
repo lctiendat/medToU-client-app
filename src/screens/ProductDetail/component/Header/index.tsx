@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons'
 
-export default function index(params: any) {
+export default function index({ navigation }: any) {
     return <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>

@@ -4,7 +4,8 @@ import { Image, Text } from "react-native-elements";
 export default function index(params: any) {
     return <View style={styles.container}>
     <Text style={styles.title}>Diabetic Diet</Text>
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scrollView} nestedScrollEnabled={true}
+>
       <View style={styles.card}>
         <Image
           source={{ uri: 'https://via.placeholder.com/150' }} // replace with your image URL
